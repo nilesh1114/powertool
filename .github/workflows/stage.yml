@@ -15,7 +15,7 @@ jobs:
    steps:
     - name: echo environment vars
       run: |
-        echo "Environment variable is " {{vars.DELTA_KEY}}"
+        echo "Environment variable is {{vars.DELTA_KEY}}"
         
 
   
