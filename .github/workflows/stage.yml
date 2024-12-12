@@ -10,7 +10,7 @@ on:
       
 jobs:
   stagedeploy:
-   runs-on: ubunt-latest
+   runs-on: ubuntu-latest
    environment: ${{inputs.target_stage}}
    steps:
     - name: echo environment vars
