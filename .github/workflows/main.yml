@@ -1,7 +1,6 @@
 name: Environment Variables and Contexts Demo
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
@@ -9,43 +8,39 @@ on:
 jobs:
   demo-job:
     runs-on: ubuntu-latest
-    
-    # Define environment variables for the entire job
-    env:
-      GLOBAL_ENV_VAR: "This is a global environment variable"
-      GREETING: "Hello"
-    
+
     steps:
       # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # Step 2: Use context variables (GitHub context, job context)
+      # Step 2: Define environment variables within a step (correct scope)
       - name: Display GitHub Context Information
+        env:
+          GLOBAL_ENV_VAR: "This is a global environment variable"
+          GREETING: "Hello"
         run: |
           echo "Repository Name: ${{ github.repository }}"
           echo "Event Name: ${{ github.event_name }}"
           echo "Workflow Run ID: ${{ github.run_id }}"
-          
+
       # Step 3: Use an environment variable
       - name: Display Environment Variable (GREETING)
         run: |
           echo "${{ env.GREETING }} World!"
-          
-      # Step 4: Use environment variables in multiple steps
-      - name: Display Another Environment Variable (GLOBAL_ENV_VAR)
+
+      # Step 4: Display Another Environment Variable (GLOBAL_ENV_VAR)
+      - name: Display Environment Variable (GLOBAL_ENV_VAR)
         run: |
           echo "${{ env.GLOBAL_ENV_VAR }}"
-          
-      # Step 5: Set and use environment variables within a step dynamically
+
+      # Step 5: Set and use environment variables dynamically within a step
       - name: Set and Use Dynamic Environment Variable
         run: |
           echo "MY_DYNAMIC_VAR=Dynamic Value" >> $GITHUB_ENV
           echo "MY_DYNAMIC_VAR is: ${{ env.MY_DYNAMIC_VAR }}"
 
-      # Step 6: Display final result using environment variable
+      # Step 6: Display final result using dynamic environment variable
       - name: Final Output Using Dynamic Env Var
         run: |
           echo "Final Dynamic Value: ${{ env.MY_DYNAMIC_VAR }}"
-
-   t 
