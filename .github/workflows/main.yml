@@ -31,14 +31,13 @@ jobs:
           echo "Workflow Run ID: ${{ github.run_id }}"
 
      
-      - name: Display Environment Variable (GREETING)
-        run: |
-          echo "${{ env.GREETING }} World!"
-
+      - name: Use Secret API Key 
+        run: echo "API_KEY=${{ secrets.API_KEY }}"
+         
       # Step 4: Display Another Environment Variable (GLOBAL_ENV_VAR)
       - name: Display Environment Variable (GLOBAL_ENV_VAR)
-        run: |
-          echo "${{ env.GLOBAL_ENV_VAR }}"
+        run: echo "API_KEY=${{ secrets.API_KEY }}"
+          
 
       # Step 5: Set and use environment variables dynamically within a step
       - name: Set and Use Dynamic Environment Variable
