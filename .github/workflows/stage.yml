@@ -1,0 +1,21 @@
+name: Stage Environment
+
+on:
+ workflow_dispatch:
+ 
+   inputs:
+    target_stage:
+     type: environment
+     default: staging
+      
+jobs:
+  stagedeploy:
+   runs-on: bunt-latest
+   environment: ${{inputs.target_stage}}
+   steps:
+    - name: echo environment vars
+      run: |
+        echo "Environment variable is " {{vars.DELTA_KEY}}"
+        
+
+  
