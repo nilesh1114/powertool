@@ -43,7 +43,6 @@ jobs:
           echo "MY_DYNAMIC_VAR=Dynamic Value" >> $GITHUB_ENV
           echo "MY_DYNAMIC_VAR is: ${{ env.MY_DYNAMIC_VAR }}"
 
-      # Step 6: Display final result using dynamic environment variable
       - name: Final Output Using Dynamic Env Var
         run: |
           echo "Final Dynamic Value: ${{ env.MY_DYNAMIC_VAR }}"
