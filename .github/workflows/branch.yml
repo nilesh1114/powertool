@@ -1,0 +1,34 @@
+name: Branch Specific
+
+on:
+ workflow_dispatch:
+ push:
+    branches:
+      - prod
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set staging environment
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          echo "STAGING_API_KEY=${{ secrets.STAGING_API_KEY }}" >> $GITHUB_ENV
+
+      - name: Set production environment
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "PROD_API_KEY=${{ secrets.PROD_API_KEY }}" >> $GITHUB_ENV
+
+      - name: Deploy Application
+        run: |
+          if [ "$GITHUB_REF" == "refs/heads/staging" ]; then
+            echo "Deploying to Staging with API_KEY: $STAGING_API_KEY"
+          else
+            echo "Deploying to Production with API_KEY: $PROD_API_KEY"
+          fi
