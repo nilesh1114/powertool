@@ -2,10 +2,7 @@ name: Branch Specific
 
 on:
  workflow_dispatch:
- push:
-    branches:
-      - prod
-      - staging
+ 
 
 jobs:
   deploy:
