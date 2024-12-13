@@ -21,7 +21,7 @@ jobs:
           echo "STAGING_API_KEY=${{ secrets.STAGING_API_KEY }}" >> $GITHUB_ENV
 
       - name: Set production environment
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/prod'
         run: |
           echo "PROD_API_KEY=${{ secrets.PROD_API_KEY }}" >> $GITHUB_ENV
 
